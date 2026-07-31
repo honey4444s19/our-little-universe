@@ -408,7 +408,8 @@ function endHeartGame() {
     endUI.classList.remove('hidden');
     
     const tl = gsap.timeline();
-    tl.fromTo('#hg-msg-1', {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 1.5})
+    // Replaced .hidden with inline display manipulation so GSAP works cleanly
+    tl.to('#hg-msg-1', {display: 'block', opacity: 1, y: 0, duration: 1.5})
       .to('#hg-msg-2', {display: 'block', opacity: 1, duration: 1.5, delay: 1})
       .to('#hg-msg-3', {display: 'block', opacity: 1, duration: 1.5, delay: 1.5});
       
@@ -420,7 +421,7 @@ function endHeartGame() {
 }
 
 /**
- * SCENE 5: OUR LITTLE GARDEN (ANIMATED SVG/EMOJIS)
+ * SCENE 5: OUR LITTLE GARDEN
  */
 function initGarden() {
     const bed = document.getElementById('garden-bed');
@@ -519,15 +520,16 @@ function startPetalRain() {
 }
 
 /**
- * SCENE 6: STARDUST RING & TIMED REVEALS
+ * SCENE 6: PLASTIC RING & TIMED REVEALS
  */
 function initRingScene() {
     const tl = gsap.timeline();
 
+    // The text now uses inline styles instead of the CSS .hidden class to ensure GSAP can reveal it properly
     tl.to('#ring-msg-1', { display: 'block', opacity: 1, y: 0, duration: 1.5, delay: 0.5 })
       .to('#ring-msg-2', { display: 'block', opacity: 1, y: 0, duration: 1.5, delay: 1 })
       .to('#ring-msg-3', { display: 'block', opacity: 1, y: 0, duration: 1.5, delay: 1 })
-      .to('#ring-msg-4', { display: 'block', opacity: 1, scale: 1.1, duration: 2, delay: 1 });
+      .to('#ring-msg-4', { display: 'block', opacity: 1, y: 0, scale: 1.1, duration: 2, delay: 1 });
 
     backgroundStars.forEach(s => s.speedY *= 4);
 
@@ -535,7 +537,7 @@ function initRingScene() {
         const btn = document.getElementById('btn-ring-next');
         btn.classList.remove('hidden');
         gsap.fromTo(btn, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1 });
-    }, 7500);
+    }, 8000);
 }
 
 /**
