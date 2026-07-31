@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Little Universe — 105 Days</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- GSAP for cinematic animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+
+    <!-- Audio (Optional, uses local file if exists) -->
+    <audio id="bg-music" loop>
+        <source src="assets/our-song.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="heartbeat-audio">
+        <!-- We use a synthesized heartbeat in JS if no file is present to avoid errors -->
+    </audio>
+
+    <button id="music-toggle" class="glass-btn">
+        <span class="music-icon">♪</span> <span id="music-text">Play Music</span>
+    </button>
+
+    <!-- Canvas for stars, particles, and cursor trails -->
+    <canvas id="universe"></canvas>
+
+    <div id="app">
+        <!-- SCENE 0: OPENING -->
+        <section id="scene-opening" class="scene active">
+            <div class="opening-content">
+                <h2 id="opening-dates" class="cinematic-text">18.04.2026 <span class="arrow">→</span> ∞</h2>
+                <p id="opening-subtitle" class="hidden">Something beautiful started 105 days ago...</p>
+                <button id="btn-enter" class="glow-btn hidden">ENTER OUR UNIVERSE ❤️</button>
+            </div>
+        </section>
+
+        <!-- SCENE 1: 105 DAYS -->
+        <section id="scene-105" class="scene hidden">
+            <div class="days-container">
+                <h1 class="huge-number text-glow">105</h1>
+                <h3 class="subtitle tracking-wide">DAYS</h3>
+                <h4 class="sub-subtitle">15 WEEKS</h4>
+                <p class="counting">AND STILL COUNTING...</p>
+                <button class="next-btn glow-btn" data-target="scene-timeline">Continue →</button>
+            </div>
+        </section>
+
+        <!-- SCENE 2: TIMELINE -->
+        <section id="scene-timeline" class="scene hidden">
+            <h2 class="scene-title">Our Timeline</h2>
+            <div class="timeline-container" id="timeline-track">
+                <!-- Injected via JS -->
+            </div>
+            
+            <!-- Timeline Modal -->
+            <div id="timeline-modal" class="glass-modal hidden">
+                <button class="close-modal">×</button>
+                <h3 id="modal-date"></h3>
+                <p id="modal-desc"></p>
+                <p id="modal-msg" class="modal-msg"></p>
+            </div>
+            <button class="next-btn glow-btn mt-large hidden" id="btn-timeline-next" data-target="scene-stars">Continue →</button>
+        </section>
+
+        <!-- SCENE 3: THE STAR FIELD -->
+        <section id="scene-stars" class="scene hidden">
+            <h2 class="scene-title fade-text">Find the 10 special stars</h2>
+            <p class="progress-text"><span id="stars-found">0</span> / 10 memories discovered</p>
+            <div id="star-field">
+                <!-- Stars injected via JS -->
+            </div>
+            
+            <!-- Star Message Modal -->
+            <div id="star-modal" class="glass-modal hidden">
+                <p id="star-msg-text" class="modal-msg romantic-font"></p>
+                <button class="close-modal-star">✨</button>
+            </div>
+            <button class="next-btn glow-btn mt-large hidden" id="btn-stars-next" data-target="scene-hearts">Continue →</button>
+        </section>
+
+        <!-- SCENE 4: CATCH THE HEARTS -->
+        <section id="scene-hearts" class="scene hidden">
+            <div id="heart-game-ui">
+                <h2 class="scene-title" id="heart-title">Catch 5 hearts</h2>
+                <p class="progress-text"><span id="hearts-caught">0</span> / 5</p>
+            </div>
+            <div id="heart-catcher-area">
+                <!-- Hearts injected via JS -->
+            </div>
+            <div id="heart-game-end" class="cinematic-text-center hidden">
+                <p id="hg-msg-1">You caught them all.</p>
+                <p id="hg-msg-2" class="mt-med hidden">Unfortunately, you still haven't caught my heart.</p>
+                <p id="hg-msg-3" class="mt-med hidden">Too late. I already gave it to you. ❤️</p>
+                <button class="next-btn glow-btn mt-large hidden" id="btn-hearts-next" data-target="scene-garden">Continue →</button>
+            </div>
+        </section>
+
+        <!-- SCENE 5: OUR LITTLE GARDEN -->
+        <section id="scene-garden" class="scene hidden">
+            <h2 class="scene-title fade-text" id="garden-title">Planting our seeds</h2>
+            <div class="garden-bed" id="garden-bed">
+                <!-- Seeds injected via JS -->
+            </div>
+            <div id="garden-end" class="cinematic-text-center hidden mt-large">
+                <p>Look what we grew together.</p>
+                <button class="next-btn glow-btn mt-med" data-target="scene-ring">Continue →</button>
+            </div>
+        </section>
+
+        <!-- SCENE 6: THE RING -->
+        <section id="scene-ring" class="scene hidden">
+            <div class="ring-container">
+                <div class="glowing-ring"></div>
+            </div>
+            <div class="cinematic-text-center mt-large ring-text-container">
+                <p id="ring-msg-1" class="hidden">You made me a ring once.</p>
+                <p id="ring-msg-2" class="hidden mt-med">So I made you something too.</p>
+                <p id="ring-msg-3" class="hidden mt-med">Not a ring.</p>
+                <p id="ring-msg-4" class="hidden mt-med romantic-font large-text">A whole universe.</p>
+            </div>
+            <button class="next-btn glow-btn mt-large hidden" id="btn-ring-next" data-target="scene-tonight">Continue →</button>
+        </section>
+
+        <!-- SCENE 7: TONIGHT -->
+        <section id="scene-tonight" class="scene hidden">
+            <div class="night-sky">
+                <div class="moon"></div>
+                <div class="soul-star" id="star-me"><span class="label">ME</span></div>
+                <div class="soul-star" id="star-meenu"><span class="label">MEENU</span></div>
+            </div>
+            <div id="tonight-msg" class="cinematic-text-center hidden mt-large">
+                <p class="romantic-font large-text">Distance doesn't feel so far when you're here.</p>
+                <p class="mt-med">Happy 105 Days, Meenu ❤️</p>
+                <button class="next-btn glow-btn mt-large" data-target="scene-cozmo">Continue →</button>
+            </div>
+        </section>
+
+        <!-- SCENE 8: COZMO -->
+        <section id="scene-cozmo" class="scene hidden">
+            <h2 class="scene-title">Meet our little third wheel 🤖❤️</h2>
+            <div class="cozmo-container">
+                <div id="cozmo" class="cozmo">
+                    <div class="cozmo-head">
+                        <div class="cozmo-face">
+                            <div class="cozmo-eye left"></div>
+                            <div class="cozmo-eye right"></div>
+                        </div>
+                    </div>
+                    <div class="cozmo-body"></div>
+                    <div class="cozmo-treads"></div>
+                </div>
+            </div>
+            <p class="mt-med text-muted">He wanted to be part of our date too.</p>
+            <button id="btn-dance" class="glow-btn mt-med">MAKE HIM DANCE 🤖</button>
+            <button class="next-btn glass-btn mt-large" data-target="scene-final">Go to our universe →</button>
+        </section>
+
+        <!-- SCENE 9: FINAL -->
+        <section id="scene-final" class="scene hidden">
+            <div class="final-summary">
+                <h2>105 DAYS</h2>
+                <h2>15 WEEKS</h2>
+                <h2>2 DINNER DATES</h2>
+                <h2>1 LOVE STORY</h2>
+                <div class="divider"></div>
+                <p class="romantic-font large-text mt-med">And this is only the beginning.</p>
+                <h1 class="infinity">∞</h1>
+                <button class="glow-btn mt-large" onclick="location.reload()">START AGAIN</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
