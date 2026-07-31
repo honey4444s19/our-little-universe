@@ -16,9 +16,6 @@
     <audio id="bg-music" loop>
         <source src="assets/our-song.mp3" type="audio/mpeg">
     </audio>
-    <audio id="heartbeat-audio">
-        <!-- We use a synthesized heartbeat in JS if no file is present to avoid errors -->
-    </audio>
 
     <button id="music-toggle" class="glass-btn">
         <span class="music-icon">♪</span> <span id="music-text">Play Music</span>
@@ -30,21 +27,21 @@
     <div id="app">
         <!-- SCENE 0: OPENING -->
         <section id="scene-opening" class="scene active">
-            <div class="opening-content">
+            <div class="opening-content cinematic-text-center">
                 <h2 id="opening-dates" class="cinematic-text">18.04.2026 <span class="arrow">→</span> ∞</h2>
-                <p id="opening-subtitle" class="hidden">Something beautiful started 105 days ago...</p>
-                <button id="btn-enter" class="glow-btn hidden">ENTER OUR UNIVERSE ❤️</button>
+                <p id="opening-subtitle" class="hidden mt-med large-text romantic-font">Something beautiful started 105 days ago...</p>
+                <button id="btn-enter" class="glow-btn hidden mt-large">ENTER OUR UNIVERSE ❤️</button>
             </div>
         </section>
 
         <!-- SCENE 1: 105 DAYS -->
         <section id="scene-105" class="scene hidden">
-            <div class="days-container">
+            <div class="days-container cinematic-text-center">
                 <h1 class="huge-number text-glow">105</h1>
                 <h3 class="subtitle tracking-wide">DAYS</h3>
                 <h4 class="sub-subtitle">15 WEEKS</h4>
                 <p class="counting">AND STILL COUNTING...</p>
-                <button class="next-btn glow-btn" data-target="scene-timeline">Continue →</button>
+                <button class="next-btn glow-btn mt-large" data-target="scene-timeline">Continue →</button>
             </div>
         </section>
 
@@ -59,7 +56,7 @@
             <div id="timeline-modal" class="glass-modal hidden">
                 <button class="close-modal">×</button>
                 <h3 id="modal-date"></h3>
-                <p id="modal-desc"></p>
+                <p id="modal-desc" class="mt-med"></p>
                 <p id="modal-msg" class="modal-msg"></p>
             </div>
             <button class="next-btn glow-btn mt-large hidden" id="btn-timeline-next" data-target="scene-stars">Continue →</button>
@@ -75,7 +72,7 @@
             
             <!-- Star Message Modal -->
             <div id="star-modal" class="glass-modal hidden">
-                <p id="star-msg-text" class="modal-msg romantic-font"></p>
+                <p id="star-msg-text" class="modal-msg romantic-font large-text"></p>
                 <button class="close-modal-star">✨</button>
             </div>
             <button class="next-btn glow-btn mt-large hidden" id="btn-stars-next" data-target="scene-hearts">Continue →</button>
@@ -83,7 +80,7 @@
 
         <!-- SCENE 4: CATCH THE HEARTS -->
         <section id="scene-hearts" class="scene hidden">
-            <div id="heart-game-ui">
+            <div id="heart-game-ui" class="cinematic-text-center">
                 <h2 class="scene-title" id="heart-title">Catch 5 hearts</h2>
                 <p class="progress-text"><span id="hearts-caught">0</span> / 5</p>
             </div>
@@ -91,7 +88,7 @@
                 <!-- Hearts injected via JS -->
             </div>
             <div id="heart-game-end" class="cinematic-text-center hidden">
-                <p id="hg-msg-1">You caught them all.</p>
+                <p id="hg-msg-1" class="large-text romantic-font">You caught them all.</p>
                 <p id="hg-msg-2" class="mt-med hidden">Unfortunately, you still haven't caught my heart.</p>
                 <p id="hg-msg-3" class="mt-med hidden">Too late. I already gave it to you. ❤️</p>
                 <button class="next-btn glow-btn mt-large hidden" id="btn-hearts-next" data-target="scene-garden">Continue →</button>
@@ -100,46 +97,57 @@
 
         <!-- SCENE 5: OUR LITTLE GARDEN -->
         <section id="scene-garden" class="scene hidden">
-            <h2 class="scene-title fade-text" id="garden-title">Planting our seeds</h2>
+            <h2 class="scene-title fade-text">Tap the seeds to bloom our story 🌸</h2>
             <div class="garden-bed" id="garden-bed">
-                <!-- Seeds injected via JS -->
+                <!-- Seeds with floral growth injected via JS -->
             </div>
             <div id="garden-end" class="cinematic-text-center hidden mt-large">
-                <p>Look what we grew together.</p>
+                <p class="romantic-font large-text">Look at the beautiful garden we grew together. 🌿✨</p>
                 <button class="next-btn glow-btn mt-med" data-target="scene-ring">Continue →</button>
             </div>
         </section>
 
         <!-- SCENE 6: THE RING -->
         <section id="scene-ring" class="scene hidden">
-            <div class="ring-container">
-                <div class="glowing-ring"></div>
+            <div class="ring-stage">
+                <div class="ring-core">💎</div>
+                <div class="ring-orbit outer"></div>
+                <div class="ring-orbit inner"></div>
             </div>
             <div class="cinematic-text-center mt-large ring-text-container">
-                <p id="ring-msg-1" class="hidden">You made me a ring once.</p>
-                <p id="ring-msg-2" class="hidden mt-med">So I made you something too.</p>
-                <p id="ring-msg-3" class="hidden mt-med">Not a ring.</p>
-                <p id="ring-msg-4" class="hidden mt-med romantic-font large-text">A whole universe.</p>
+                <p id="ring-msg-1" class="hidden">You made me a ring once... 💍</p>
+                <p id="ring-msg-2" class="hidden mt-med">So I crafted something special for you too.</p>
+                <p id="ring-msg-3" class="hidden mt-med">Not just a ring...</p>
+                <p id="ring-msg-4" class="hidden mt-med romantic-font large-text">An entire interactive universe. 🌌✨</p>
             </div>
             <button class="next-btn glow-btn mt-large hidden" id="btn-ring-next" data-target="scene-tonight">Continue →</button>
         </section>
 
         <!-- SCENE 7: TONIGHT -->
         <section id="scene-tonight" class="scene hidden">
-            <div class="night-sky">
-                <div class="moon"></div>
-                <div class="soul-star" id="star-me"><span class="label">ME</span></div>
-                <div class="soul-star" id="star-meenu"><span class="label">MEENU</span></div>
+            <div class="cosmos-stage">
+                <div class="moon-glow"></div>
+                
+                <div class="soul-star-wrapper" id="soul-me">
+                    <span class="avatar-emoji">🪐</span>
+                    <span class="label">ME</span>
+                </div>
+                
+                <div class="soul-star-wrapper" id="soul-meenu">
+                    <span class="avatar-emoji">🌟</span>
+                    <span class="label">MEENU</span>
+                </div>
             </div>
+            
             <div id="tonight-msg" class="cinematic-text-center hidden mt-large">
-                <p class="romantic-font large-text">Distance doesn't feel so far when you're here.</p>
+                <p class="romantic-font large-text">Distance doesn't feel so far when our hearts align. 💞</p>
                 <p class="mt-med">Happy 105 Days, Meenu ❤️</p>
                 <button class="next-btn glow-btn mt-large" data-target="scene-cozmo">Continue →</button>
             </div>
         </section>
 
         <!-- SCENE 8: COZMO -->
-        <section id="scene-cozmo" class="scene hidden">
+        <section id="scene-cozmo" class="scene hidden cinematic-text-center">
             <h2 class="scene-title">Meet our little third wheel 🤖❤️</h2>
             <div class="cozmo-container">
                 <div id="cozmo" class="cozmo">
@@ -155,6 +163,7 @@
             </div>
             <p class="mt-med text-muted">He wanted to be part of our date too.</p>
             <button id="btn-dance" class="glow-btn mt-med">MAKE HIM DANCE 🤖</button>
+            <br>
             <button class="next-btn glass-btn mt-large" data-target="scene-final">Go to our universe →</button>
         </section>
 
