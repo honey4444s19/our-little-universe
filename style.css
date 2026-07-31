@@ -18,7 +18,7 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     font-family: 'Montserrat', sans-serif;
-    overflow: hidden; /* Handled by internal scroll if needed, mostly SPA fixed */
+    overflow: hidden; 
     user-select: none;
     -webkit-font-smoothing: antialiased;
 }
@@ -31,7 +31,7 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: 0;
-    pointer-events: none; /* Let clicks pass through to DOM */
+    pointer-events: none;
 }
 
 /* APP WRAPPER */
@@ -83,7 +83,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    opacity: 0; /* Handled by GSAP */
+    opacity: 0; 
     visibility: hidden;
 }
 .scene.active {
@@ -105,6 +105,7 @@ body {
     transition: all 0.4s ease;
     backdrop-filter: blur(5px);
     text-transform: uppercase;
+    display: inline-block;
 }
 .glow-btn:hover {
     background: rgba(255,255,255,0.1);
@@ -229,7 +230,7 @@ body {
     height: 100vh;
     top: 0;
     left: 0;
-    pointer-events: none; /* Let clicks pass unless on a heart */
+    pointer-events: none;
 }
 .floating-heart {
     position: absolute;
@@ -241,95 +242,151 @@ body {
 }
 .floating-heart:active { transform: scale(0.8); }
 
-/* GARDEN SCENE */
+/* SCENE 5: OUR LITTLE GARDEN */
 .garden-bed {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 40px;
-    height: 200px;
-    margin-top: 50px;
+    gap: 30px;
+    min-height: 250px;
+    margin-top: 30px;
+    position: relative;
+    flex-wrap: wrap;
 }
 .seed-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
     cursor: pointer;
+    transition: transform 0.4s ease;
 }
-.seed {
-    width: 20px;
-    height: 20px;
-    background: rgba(255,255,255,0.3);
-    border-radius: 50% 50% 50% 10%; /* Seed shape */
-    transform: rotate(45deg);
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 0 10px rgba(255,255,255,0.1);
+.seed-container:hover {
+    transform: translateY(-5px) scale(1.05);
 }
-.seed-label {
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    opacity: 0.6;
-    text-transform: uppercase;
-    transition: 0.3s;
+.flower-wrapper {
+    width: 80px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
 }
-.seed-container:hover .seed { background: rgba(255,255,255,0.8); box-shadow: 0 0 15px white; }
-.seed-container.grown .seed {
+.stem {
+    width: 4px;
+    height: 0px; 
+    background: linear-gradient(to top, #2e7d32, #81c784);
+    border-radius: 2px;
+    transition: height 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.bloom {
+    position: absolute;
+    top: 0;
     width: 60px;
     height: 60px;
-    background: radial-gradient(circle, var(--glow-pink) 0%, transparent 70%);
-    border-radius: 50%;
-    transform: rotate(0) translateY(-30px);
-    box-shadow: 0 0 30px var(--glow-purple), 0 0 60px var(--glow-pink);
-    border: 2px solid rgba(255,255,255,0.8);
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+    transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.8));
 }
-.seed-container.grown .seed-label { opacity: 1; color: var(--glow-pink); text-shadow: 0 0 10px var(--glow-pink); }
+.seed-container.grown .stem { height: 90px; }
+.seed-container.grown .bloom { transform: scale(1) rotate(0deg); opacity: 1; }
+.seed-label {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.5s ease;
+}
+.seed-container.grown .seed-label {
+    color: #ff80bf;
+    text-shadow: 0 0 10px #ff80bf;
+    font-weight: 600;
+}
 
-/* RING SCENE */
-.ring-container {
-    perspective: 1000px;
-    margin-bottom: 2rem;
+/* SCENE 6: THE RING */
+.ring-stage {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 800px;
 }
-.glowing-ring {
-    width: 200px;
-    height: 200px;
+.ring-core {
+    font-size: 4rem;
+    z-index: 2;
+    animation: core-pulse 2.5s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.9));
+}
+.ring-orbit {
+    position: absolute;
     border-radius: 50%;
-    border: 4px solid rgba(255, 255, 255, 0.1);
-    border-top: 4px solid var(--text-main);
-    border-bottom: 4px solid var(--accent-gold);
-    box-shadow: 0 0 30px var(--glow-blue), inset 0 0 20px var(--glow-purple);
-    animation: rotate-ring 8s linear infinite;
-    transform-style: preserve-3d;
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 20px rgba(186, 85, 211, 0.6), inset 0 0 20px rgba(0, 191, 255, 0.6);
+}
+.ring-orbit.outer {
+    width: 240px;
+    height: 240px;
+    transform: rotateX(70deg) rotateY(15deg);
+    animation: spin-ring-outer 10s linear infinite;
+}
+.ring-orbit.inner {
+    width: 180px;
+    height: 180px;
+    border: 3px solid rgba(255, 215, 0, 0.8);
+    transform: rotateX(65deg) rotateY(-20deg);
+    animation: spin-ring-inner 7s linear infinite reverse;
 }
 
-/* TONIGHT SCENE */
-.night-sky { position: relative; width: 300px; height: 300px; display: flex; justify-content: center; align-items: center; }
-.moon {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #fff 0%, #ddd 50%, #888 100%);
-    box-shadow: 0 0 60px rgba(255,255,255,0.4);
-    opacity: 0.5;
-    position: absolute;
-}
-.soul-star {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: white;
-    border-radius: 50%;
-    box-shadow: 0 0 30px white;
+/* SCENE 7: TONIGHT */
+.cosmos-stage {
+    position: relative;
+    width: 320px;
+    height: 320px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.soul-star .label { position: absolute; top: 30px; font-size: 0.8rem; letter-spacing: 2px; }
-#star-me { left: -50px; box-shadow: 0 0 30px var(--glow-blue); }
-#star-meenu { right: -50px; box-shadow: 0 0 30px var(--glow-pink); }
+.moon-glow {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 0%, rgba(220,220,255,0.8) 40%, transparent 70%);
+    box-shadow: 0 0 80px rgba(255, 255, 255, 0.5), 0 0 120px rgba(147, 51, 234, 0.4);
+    animation: moon-pulse 4s ease-in-out infinite alternate;
+}
+.soul-star-wrapper {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+.soul-star-wrapper .avatar-emoji {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));
+}
+.soul-star-wrapper .label {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    margin-top: 5px;
+    font-weight: 600;
+    background: rgba(0,0,0,0.5);
+    padding: 2px 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+#soul-me { left: -20px; }
+#soul-meenu { right: -20px; }
 
 /* COZMO ROBOT (CSS ART) */
-.cozmo-container { margin: 2rem 0; perspective: 600px; }
+.cozmo-container { margin: 2rem auto; perspective: 600px; display: flex; justify-content: center;}
 .cozmo {
     width: 100px;
     height: 120px;
@@ -401,7 +458,7 @@ body {
     font-size: clamp(1.5rem, 4vw, 2.5rem);
     letter-spacing: 4px;
     margin: 15px 0;
-    opacity: 0; /* Animated in via GSAP */
+    opacity: 0; 
     font-weight: 300;
 }
 .divider { width: 50px; height: 2px; background: white; margin: 30px auto; opacity: 0; }
@@ -416,9 +473,21 @@ body {
     0% { opacity: 0.6; box-shadow: 0 0 10px var(--glow-blue); }
     100% { opacity: 1; box-shadow: 0 0 30px var(--glow-purple); }
 }
-@keyframes rotate-ring {
-    0% { transform: rotateX(60deg) rotateY(0deg) rotateZ(0deg); }
-    100% { transform: rotateX(60deg) rotateY(0deg) rotateZ(360deg); }
+@keyframes spin-ring-outer {
+    0% { transform: rotateX(70deg) rotateY(15deg) rotateZ(0deg); }
+    100% { transform: rotateX(70deg) rotateY(15deg) rotateZ(360deg); }
+}
+@keyframes spin-ring-inner {
+    0% { transform: rotateX(65deg) rotateY(-20deg) rotateZ(0deg); }
+    100% { transform: rotateX(65deg) rotateY(-20deg) rotateZ(360deg); }
+}
+@keyframes core-pulse {
+    0% { transform: scale(0.9); filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6)); }
+    100% { transform: scale(1.15); filter: drop-shadow(0 0 35px rgba(255, 105, 180, 1)); }
+}
+@keyframes moon-pulse {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    100% { transform: scale(1.05); opacity: 0.9; }
 }
 @keyframes cozmo-blink {
     0%, 96%, 100% { transform: scaleY(1); }
@@ -431,6 +500,8 @@ body {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-    .garden-bed { flex-wrap: wrap; gap: 20px; height: auto; padding-top: 20px; }
-    .seed-container { transform: scale(0.8); }
+    .garden-bed { gap: 15px; padding-top: 20px; }
+    .flower-wrapper { transform: scale(0.85); }
+    .ring-stage { transform: scale(0.8); }
+    .cosmos-stage { transform: scale(0.8); }
 }
