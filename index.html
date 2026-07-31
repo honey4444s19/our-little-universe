@@ -88,9 +88,9 @@
                 <!-- Hearts injected via JS -->
             </div>
             <div id="heart-game-end" class="cinematic-text-center hidden">
-                <p id="hg-msg-1" class="large-text romantic-font">You caught them all.</p>
-                <p id="hg-msg-2" class="mt-med hidden">Unfortunately, you still haven't caught my heart.</p>
-                <p id="hg-msg-3" class="mt-med hidden">Too late. I already gave it to you. ❤️</p>
+                <p id="hg-msg-1" class="large-text romantic-font" style="display:none; opacity:0; transform: translateY(20px);">You caught them all.</p>
+                <p id="hg-msg-2" class="mt-med" style="display:none; opacity:0;">Unfortunately, you still haven't caught my heart.</p>
+                <p id="hg-msg-3" class="mt-med" style="display:none; opacity:0;">Too late. I already gave it to you. ❤️</p>
                 <button class="next-btn glow-btn mt-large hidden" id="btn-hearts-next" data-target="scene-garden">Continue →</button>
             </div>
         </section>
@@ -110,15 +110,21 @@
         <!-- SCENE 6: THE RING -->
         <section id="scene-ring" class="scene hidden">
             <div class="ring-stage">
-                <div class="ring-core">💎</div>
+                <div class="ring-core">
+                    <!-- Plastic Wedding Ring -->
+                    <div class="plastic-band">
+                        <div class="plastic-gem"></div>
+                    </div>
+                </div>
                 <div class="ring-orbit outer"></div>
                 <div class="ring-orbit inner"></div>
             </div>
             <div class="cinematic-text-center mt-large ring-text-container">
-                <p id="ring-msg-1" class="hidden">You made me a ring once... 💍</p>
-                <p id="ring-msg-2" class="hidden mt-med">So I crafted something special for you too.</p>
-                <p id="ring-msg-3" class="hidden mt-med">Not just a ring...</p>
-                <p id="ring-msg-4" class="hidden mt-med romantic-font large-text">An entire interactive universe. 🌌✨</p>
+                <!-- Using inline styles here to prevent GSAP conflicts with CSS !important hidden classes -->
+                <p id="ring-msg-1" style="display:none; opacity:0; transform: translateY(20px);">You made me a plastic wedding ring once... 💍</p>
+                <p id="ring-msg-2" class="mt-med" style="display:none; opacity:0; transform: translateY(20px);">It was the most beautiful thing in the world to me.</p>
+                <p id="ring-msg-3" class="mt-med" style="display:none; opacity:0; transform: translateY(20px);">So I wanted to craft something for you too...</p>
+                <p id="ring-msg-4" class="mt-med romantic-font large-text" style="display:none; opacity:0; transform: translateY(20px);">Not just a ring, but an entire universe. 🌌✨</p>
             </div>
             <button class="next-btn glow-btn mt-large hidden" id="btn-ring-next" data-target="scene-tonight">Continue →</button>
         </section>
