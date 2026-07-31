@@ -319,11 +319,41 @@ body {
     perspective: 800px;
 }
 .ring-core {
-    font-size: 4rem;
     z-index: 2;
-    animation: core-pulse 2.5s ease-in-out infinite alternate;
-    filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.9));
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+/* Plastic Ring Art */
+.plastic-band {
+    width: 80px;
+    height: 80px;
+    border: 14px solid #ff4da6; /* Cute vibrant pink plastic */
+    border-radius: 50%;
+    position: relative;
+    /* Creating a plastic shine effect */
+    box-shadow: 
+        inset -3px -3px 6px rgba(0,0,0,0.3), 
+        inset 3px 3px 6px rgba(255,255,255,0.8), 
+        0 5px 15px rgba(255, 77, 166, 0.6);
+    animation: core-pulse 2.5s ease-in-out infinite alternate;
+}
+.plastic-gem {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 35px;
+    height: 35px;
+    background: #00e5ff; /* Plastic cyan "gem" */
+    border-radius: 6px;
+    /* Plastic shine for the gem */
+    box-shadow: 
+        inset -2px -2px 5px rgba(0,0,0,0.3), 
+        inset 2px 2px 8px rgba(255,255,255,0.9), 
+        0 0 20px rgba(0, 229, 255, 0.8);
+}
+
 .ring-orbit {
     position: absolute;
     border-radius: 50%;
@@ -482,8 +512,8 @@ body {
     100% { transform: rotateX(65deg) rotateY(-20deg) rotateZ(360deg); }
 }
 @keyframes core-pulse {
-    0% { transform: scale(0.9); filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6)); }
-    100% { transform: scale(1.15); filter: drop-shadow(0 0 35px rgba(255, 105, 180, 1)); }
+    0% { transform: scale(0.95); }
+    100% { transform: scale(1.05); }
 }
 @keyframes moon-pulse {
     0% { transform: scale(0.95); opacity: 0.7; }
